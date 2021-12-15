@@ -257,7 +257,7 @@ while (true)
         Math.random2(0,maxFiles-1) => int soundChoice; //choose sound file randomly
         Math.random2f(0.99,1.01) => float rate; //vary pitch randomly
         sampleFilepaths[soundChoice] => sounds[soundChoice][i].read;
-        varyFilePos(soundsFilePos[soundChoice][0], soundsFilePos[soundChoice][1], sampleFilepaths[soundChoice]);
+        varyFilePos(soundsFilePos[soundChoice][0], soundsFilePos[soundChoice][1], sampleFilepaths[soundChoice]); 
         envelopeFilepath => envBufs[i].read;
         spork ~ grain(sounds[soundChoice][i], envBufs[i], soundsFilePos[soundChoice][0], rate, gGain, gPan, gDuration); 
         gGap::ms => now;

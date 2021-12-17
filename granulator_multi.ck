@@ -3,7 +3,7 @@
 100 => int gGap; //in samples
 10 => int maxGrains; //number of simultaneous grains
 3 => int maxFiles; //number of input files
-300 => int grainSpray; //amount file selection is allowed to vary by
+10000 => int grainSpray; //amount file selection is allowed to vary by
 
 //band cutoffs in Hz
 0.0 => float lowBandMin;
@@ -212,7 +212,7 @@ fun int chooseFilePos(string fileName, int bandChoice)
     }
 }
 
-fun int varyFilePos(int filePos, int sampleLength, string fileName)
+fun int varyFilePos(int filePos, int sampleLength)
 {
     Math.random2(filePos-grainSpray,filePos+grainSpray) => int newFilePos;
     
@@ -257,9 +257,13 @@ while (true)
         Math.random2(0,maxFiles-1) => int soundChoice; //choose sound file randomly
         Math.random2f(0.99,1.01) => float rate; //vary pitch randomly
         sampleFilepaths[soundChoice] => sounds[soundChoice][i].read;
-        varyFilePos(soundsFilePos[soundChoice][0], soundsFilePos[soundChoice][1], sampleFilepaths[soundChoice]); 
+        varyFilePos(soundsFilePos[soundChoice][0], soundsFilePos[soundChoice][1]) => int variedFilePos;
         envelopeFilepath => envBufs[i].read;
-        spork ~ grain(sounds[soundChoice][i], envBufs[i], soundsFilePos[soundChoice][0], rate, gGain, gPan, gDuration); 
+        spork ~ grain(sounds[soundChoice][i], envBufs[i], variedFilePos, rate, gGain, gPan, gDuration); 
+        //for (0 => int s; s < maxFiles; s++)
+        //{
+        //    spork ~ grain(sounds[soundChoice][s], envBufs[i], soundsFilePos[soundChoice][0], rate, gGain, gPan, gDuration); 
+        //}
         gGap::ms => now;
     }
     

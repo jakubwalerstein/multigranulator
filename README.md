@@ -1,6 +1,9 @@
 # multigranulator
 A granulator written in ChucK with some novel features
 
+start by downloading ChucK from this link, then install
+https://chuck.cs.princeton.edu/release/
+
 granulator_multi.ck is the file to run here, use on the command line like this:
 
 chuck granulator_multi.ck:"examplefilepath.wav":mid:"anotherfilepath.wav":low

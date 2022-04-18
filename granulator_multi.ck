@@ -23,7 +23,7 @@ if (me.args())
     me.args() / 2 => maxFiles;
 }
 
-"/Users/jakubwalerstein/Documents/Development/ChucK/Granulator/envelopes/gEnv_blackman.aif" => string envelopeFilepath;
+"./envelopes/gEnv_blackman.aif" => string envelopeFilepath;
 SndBuf envBufs[maxGrains];
 SndBuf sounds[maxFiles][maxGrains];//store sound buffers for each sound's grains
 int soundsFilePos[maxFiles][2];//store file positions for each sound, as well as sample length
@@ -64,9 +64,9 @@ if (me.args())
 else 
 {
     //use default files
-    "/Users/jakubwalerstein/Documents/Development/ChucK/Granulator/samples/018_low-glass-bow_stereo.aif" => sampleFilepaths[0];
-    "/Users/jakubwalerstein/Documents/Development/ChucK/Granulator/samples/000_tanpura.wav" => sampleFilepaths[1];
-    "/Users/jakubwalerstein/Documents/Development/ChucK/Granulator/samples/001_musicbox.aif" => sampleFilepaths[2];
+    "./samples/018_low-glass-bow_stereo.aif" => sampleFilepaths[0];
+    "./samples/000_tanpura.wav" => sampleFilepaths[1];
+    "./samples/001_musicbox.aif" => sampleFilepaths[2];
     -1 => sampleBandChoice[0];
     -1 => sampleBandChoice[1];
     -1 => sampleBandChoice[2];

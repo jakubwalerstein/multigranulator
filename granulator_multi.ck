@@ -227,6 +227,17 @@ fun int varyFilePos(int filePos, int sampleLength)
     return newFilePos;
 }
 
+function void rec()
+{
+    dac => Gain g => WvOut w => blackhole;
+    "./output/" => w.autoPrefix;
+    "special:auto" => w.wavFilename;
+    <<<"writing to file: ", w.filename()>>>;
+    1 => g.gain;
+    null @=> w;
+    while( true ) 1::second => now;
+}
+
 //select a file position for each input file
 for (0 => int j; j < maxFiles; j++)
 {
@@ -246,6 +257,8 @@ for (0 => int j; j < maxFiles; j++)
 //chooseFilePos(sampleFilepaths[1], 1) => soundsFilePos[1];
 //chooseFilePos(sampleFilepaths[2], 2) => soundsFilePos[2];
 //<<< soundsFilePos[0], soundsFilePos[1], soundsFilePos[2] >>>; 
+
+spork ~ rec();
 
 //main loop
 while (true)
